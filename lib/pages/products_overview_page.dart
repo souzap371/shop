@@ -31,7 +31,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
     Provider.of<ProductList>(
       context,
       listen: false,
-    ).loadProduct().then((value) {
+    ).loadProducts().then((value) {
       setState(() {
         _isLoading = false;
       });
