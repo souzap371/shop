@@ -1,6 +1,4 @@
-import 'dart:ffi';
 import 'dart:math';
-
 import 'package:shop/models/cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:shop/models/product.dart';

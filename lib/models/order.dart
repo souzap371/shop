@@ -1,4 +1,3 @@
-import 'package:shop/models/cart.dart';
 import 'package:shop/models/cart_item.dart';
 
 class Order {

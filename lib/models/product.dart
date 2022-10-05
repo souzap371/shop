@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:shop/utils/contants.dart';
+import 'package:flutter/material.dart';
+import 'package:shop/utils/constants.dart';
 
 class Product with ChangeNotifier {
   final String id;
@@ -27,12 +26,12 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> toggleFavorite() async {
+  Future<void> toggleFavorite(String token) async {
     try {
       _toggleFavorite();
 
       final response = await http.patch(
-        Uri.parse('${Constants.PRODUCT_BASE_URL}/$id.json'),
+        Uri.parse('${Constants.PRODUCT_BASE_URL}/$id.json?auth=$token'),
         body: jsonEncode({"isFavorite": isFavorite}),
       );
 
