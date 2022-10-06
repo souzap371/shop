@@ -17,7 +17,7 @@ class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   AuthMode _authMode = AuthMode.Login;
-  Map<String, String> _authData = {
+  final Map<String, String> _authData = {
     'email': '',
     'password': '',
   };
@@ -39,12 +39,12 @@ class _AuthFormState extends State<AuthForm> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('Ocorreu um Erro.'),
+        title: const Text('Ocorreu um Erro.'),
         content: Text(msg),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('Fechar'),
+            child: const Text('Fechar'),
           ),
         ],
       ),
@@ -104,7 +104,7 @@ class _AuthFormState extends State<AuthForm> {
           child: Column(
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'E-mail'),
+                decoration: const InputDecoration(labelText: 'E-mail'),
                 keyboardType: TextInputType.emailAddress,
                 onSaved: (email) => _authData['email'] = email ?? '',
                 validator: (_email) {
@@ -116,7 +116,7 @@ class _AuthFormState extends State<AuthForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Senha'),
+                decoration: const InputDecoration(labelText: 'Senha'),
                 keyboardType: TextInputType.emailAddress,
                 obscureText: true,
                 controller: _passwordController,
@@ -144,15 +144,12 @@ class _AuthFormState extends State<AuthForm> {
                           return null;
                         },
                 ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               if (_isLoading)
-                CircularProgressIndicator()
+                const CircularProgressIndicator()
               else
                 ElevatedButton(
                   onPressed: _submit,
-                  child: Text(
-                    _authMode == AuthMode.Login ? 'ENTRAR' : 'REGISTRAR',
-                  ),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -162,8 +159,11 @@ class _AuthFormState extends State<AuthForm> {
                       vertical: 8,
                     ),
                   ),
+                  child: Text(
+                    _authMode == AuthMode.Login ? 'ENTRAR' : 'REGISTRAR',
+                  ),
                 ),
-              Spacer(),
+              const Spacer(),
               TextButton(
                 onPressed: _switchAuthMode,
                 child: Text(
