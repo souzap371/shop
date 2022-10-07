@@ -11,7 +11,7 @@ class AuthPage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Color.fromRGBO(215, 117, 255, 0.5),
@@ -22,7 +22,7 @@ class AuthPage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,16 +49,16 @@ class AuthPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Text(
+                  child: const Text(
                     'Minha Loja',
                     style: TextStyle(
                       fontSize: 45,
                       fontFamily: 'Anton',
-                      color: Theme.of(context).accentTextTheme.headline6?.color,
+                      color: Colors.white,
                     ),
                   ),
                 ),
-                AuthForm(),
+                const AuthForm(),
               ],
             ),
           ),

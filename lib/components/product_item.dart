@@ -7,6 +7,7 @@ import 'package:shop/utils/app_routes.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;
+
   const ProductItem(
     this.product, {
     Key? key,
@@ -20,13 +21,13 @@ class ProductItem extends StatelessWidget {
         backgroundImage: NetworkImage(product.imageUrl),
       ),
       title: Text(product.name),
-      trailing: Container(
+      trailing: SizedBox(
         width: 100,
         child: Row(
           children: [
             IconButton(
-              icon: Icon(Icons.edit),
-              color: Theme.of(context).primaryColor,
+              icon: const Icon(Icons.edit),
+              color: Theme.of(context).colorScheme.primary,
               onPressed: () {
                 Navigator.of(context).pushNamed(
                   AppRoutes.PRODUCT_FORM,
@@ -35,21 +36,21 @@ class ProductItem extends StatelessWidget {
               },
             ),
             IconButton(
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               color: Theme.of(context).errorColor,
               onPressed: () {
                 showDialog<bool>(
                   context: context,
                   builder: (ctx) => AlertDialog(
-                    title: Text('Excluir Produto'),
-                    content: Text('Tem certeza?'),
+                    title: const Text('Excluir Produto'),
+                    content: const Text('Tem certeza?'),
                     actions: [
                       TextButton(
-                        child: Text('Não'),
+                        child: const Text('Não'),
                         onPressed: () => Navigator.of(ctx).pop(false),
                       ),
                       TextButton(
-                        child: Text('Sim'),
+                        child: const Text('Sim'),
                         onPressed: () => Navigator.of(ctx).pop(true),
                       ),
                     ],

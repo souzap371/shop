@@ -14,7 +14,7 @@ class CartPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Carrinho'),
+        title: const Text('Carrinho'),
       ),
       body: Column(
         children: [
@@ -28,24 +28,23 @@ class CartPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Total',
                     style: TextStyle(
                       fontSize: 20,
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Chip(
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     label: Text(
                       'R\$${cart.totalAmount.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        color:
-                            Theme.of(context).primaryTextTheme.headline6?.color,
+                      style: const TextStyle(
+                        color: Colors.white,
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CartButton(cart: cart)
                 ],
               ),
@@ -81,26 +80,22 @@ class _CartButtonState extends State<CartButton> {
   @override
   Widget build(BuildContext context) {
     return _isLoading
-        ? CircularProgressIndicator()
+        ? const CircularProgressIndicator()
         : TextButton(
-            child: Text('COMPRAR'),
-            style: TextButton.styleFrom(
-                textStyle: TextStyle(
-              color: Theme.of(context).primaryColor,
-            )),
             onPressed: widget.cart.itemsCount == 0
                 ? null
                 : () async {
                     setState(() => _isLoading = true);
+
                     await Provider.of<OrderList>(
                       context,
                       listen: false,
                     ).addOrder(widget.cart);
 
-                    setState(() => _isLoading = false);
-
                     widget.cart.clear();
+                    setState(() => _isLoading = false);
                   },
+            child: const Text('COMPRAR'),
           );
   }
 }

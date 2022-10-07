@@ -13,12 +13,12 @@ class ProductFormPage extends StatefulWidget {
 class _ProductFormPageState extends State<ProductFormPage> {
   final _priceFocus = FocusNode();
   final _descriptionFocus = FocusNode();
+
   final _imageUrlFocus = FocusNode();
   final _imageUrlController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
-  final _formData = Map<String, Object>();
+  final _formData = <String, Object>{};
 
   bool _isLoading = false;
 
@@ -53,6 +53,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
     super.dispose();
     _priceFocus.dispose();
     _descriptionFocus.dispose();
+
     _imageUrlFocus.removeListener(updateImage);
     _imageUrlFocus.dispose();
   }
@@ -91,11 +92,11 @@ class _ProductFormPageState extends State<ProductFormPage> {
       await showDialog<void>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Text('Ocorreu um erro!'),
-          content: Text('Ocorreu um erro para salvar o produto.'),
+          title: const Text('Ocorreu um erro!'),
+          content: const Text('Ocorreu um erro para salvar o produto.'),
           actions: [
             TextButton(
-              child: Text('Ok'),
+              child: const Text('Ok'),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ],
@@ -110,16 +111,16 @@ class _ProductFormPageState extends State<ProductFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Formulário de Produto'),
+        title: const Text('Formulário de Produto'),
         actions: [
           IconButton(
             onPressed: _submitForm,
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
           )
         ],
       ),
       body: _isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : Padding(
@@ -140,7 +141,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       onSaved: (name) => _formData['name'] = name ?? '',
                       validator: (_name) {
                         final name = _name ?? '';
-
                         if (name.trim().isEmpty) {
                           return 'Nome é obrigatório';
                         }
@@ -153,11 +153,12 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     ),
                     TextFormField(
                       initialValue: _formData['price']?.toString(),
-                      decoration: InputDecoration(labelText: 'Preço'),
+                      decoration: const InputDecoration(labelText: 'Preço'),
                       textInputAction: TextInputAction.next,
                       focusNode: _priceFocus,
-                      keyboardType: TextInputType.numberWithOptions(
+                      keyboardType: const TextInputType.numberWithOptions(
                         decimal: true,
+                        signed: true,
                       ),
                       onFieldSubmitted: (_) {
                         FocusScope.of(context).requestFocus(_descriptionFocus);
@@ -177,7 +178,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     ),
                     TextFormField(
                       initialValue: _formData['description']?.toString(),
-                      decoration: InputDecoration(labelText: 'Descrição'),
+                      decoration: const InputDecoration(labelText: 'Descrição'),
                       focusNode: _descriptionFocus,
                       keyboardType: TextInputType.multiline,
                       maxLines: 3,
@@ -201,8 +202,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            decoration:
-                                InputDecoration(labelText: 'Url da Imagem'),
+                            decoration: const InputDecoration(
+                                labelText: 'Url da Imagem'),
                             keyboardType: TextInputType.url,
                             textInputAction: TextInputAction.done,
                             focusNode: _imageUrlFocus,
@@ -212,6 +213,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                                 _formData['imageUrl'] = imageUrl ?? '',
                             validator: (_imageUrl) {
                               final imageUrl = _imageUrl ?? '';
+
                               if (!isValidImageUrl(imageUrl)) {
                                 return 'Informe uma url válida!';
                               }
@@ -234,7 +236,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                           ),
                           alignment: Alignment.center,
                           child: _imageUrlController.text.isEmpty
-                              ? Text('Informe a Url')
+                              ? const Text('Informe a Url')
                               : Image.network(_imageUrlController.text),
                         ),
                       ],

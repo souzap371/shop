@@ -4,6 +4,7 @@ import 'package:shop/models/order.dart';
 
 class OrderWidget extends StatefulWidget {
   final Order order;
+
   const OrderWidget({
     Key? key,
     required this.order,
@@ -27,7 +28,7 @@ class _OrderWidgetState extends State<OrderWidget> {
               DateFormat('dd/MM/yyyy hh:mm').format(widget.order.date),
             ),
             trailing: IconButton(
-              icon: Icon(Icons.expand_more),
+              icon: const Icon(Icons.expand_more),
               onPressed: () {
                 setState(() {
                   _expanded = !_expanded;
@@ -41,7 +42,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                 horizontal: 15,
                 vertical: 4,
               ),
-              height: (widget.order.products.length * 25.0) + 10,
+              height: (widget.order.products.length * 24) + 10,
               child: ListView(
                 children: widget.order.products.map(
                   (product) {
@@ -50,14 +51,14 @@ class _OrderWidgetState extends State<OrderWidget> {
                       children: [
                         Text(
                           product.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
                           '${product.quantity}x R\$ ${product.price}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             color: Colors.grey,
                           ),

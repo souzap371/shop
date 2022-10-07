@@ -28,6 +28,7 @@ class ProductList with ChangeNotifier {
 
   Future<void> loadProducts() async {
     _items.clear();
+
     final response = await http.get(
       Uri.parse(
         '${Constants.PRODUCT_BASE_URL}.json?auth=$_token',
@@ -45,7 +46,6 @@ class ProductList with ChangeNotifier {
         favResponse.body == 'null' ? {} : jsonDecode(favResponse.body);
 
     Map<String, dynamic> data = jsonDecode(response.body);
-
     data.forEach((productId, productData) {
       final isFavorite = favData[productId] ?? false;
       _items.add(
@@ -64,6 +64,7 @@ class ProductList with ChangeNotifier {
 
   Future<void> saveProduct(Map<String, Object> data) {
     bool hasId = data['id'] != null;
+
     final product = Product(
       id: hasId ? data['id'] as String : Random().nextDouble().toString(),
       name: data['name'] as String,

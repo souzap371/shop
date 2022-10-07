@@ -13,7 +13,7 @@ class AppDrawer extends StatelessWidget {
             title: Text('Bem vindo Usuário!'),
             automaticallyImplyLeading: false,
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             leading: Icon(Icons.shop),
             title: Text('Loja'),
@@ -23,7 +23,7 @@ class AppDrawer extends StatelessWidget {
               );
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             leading: Icon(Icons.payment),
             title: Text('Pedidos'),
@@ -33,7 +33,7 @@ class AppDrawer extends StatelessWidget {
               );
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             leading: Icon(Icons.edit),
             title: Text('Gerenciar Produtos'),
