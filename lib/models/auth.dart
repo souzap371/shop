@@ -51,11 +51,12 @@ class Auth with ChangeNotifier {
 
       _expiryDate = DateTime.now().add(
         Duration(
-          seconds: int.parse(body['expireIn']),
+          seconds: int.parse(body['expiresIn']),
         ),
       );
       notifyListeners();
     }
+    // print(body);
   }
 
   Future<void> signup(String email, String password) async {
